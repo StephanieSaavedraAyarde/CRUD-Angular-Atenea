@@ -17,4 +17,15 @@ export class EstudianteService {
   getEstudiantes(): Observable<any>{
     return this.firestore.collection('estudiante', ref => ref.orderBy('fechaCreacion', 'asc')).snapshotChanges();
   }
+
+  eliminarEstudiantes(id: string): Promise<any> {
+    return this.firestore.collection('estudiante').doc(id).delete();
+  }
+
+  getEstudiante(id: string): Observable<any>{
+    return this.firestore.collection('estudiante').doc(id).snapshotChanges();
+  }
+  actualizarEstudiante(id: string, data:any): Promise<any> {
+    return this.firestore.collection('estudiante').doc(id).update(data);
+  }
 }
